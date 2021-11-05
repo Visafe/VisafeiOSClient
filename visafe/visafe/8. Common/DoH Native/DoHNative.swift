@@ -65,7 +65,7 @@ class DoHNative {
         loadDnsManager { dnsManager in
             guard let manager = dnsManager else {
                 self.isInstalled = false
-                if CacheManager.shared.getDohStatus() == nil {
+                if CacheManager.shared.getDohStatus() == nil || !self.isEnabled {
                     CacheManager.shared.setDohStatus(value: false)
                 }
                 self.isEnabled = false
