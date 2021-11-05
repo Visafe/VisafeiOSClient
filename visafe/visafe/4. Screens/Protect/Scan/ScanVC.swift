@@ -20,7 +20,7 @@ public enum ScanDescriptionEnum: String {
     func getDescription() -> String {
         switch self {
         case .about:
-            return "Visafe giúp bạn kiểm tra toàn diện về nguy hại, mã độc, quảng cáo & theo dõi."
+            return "Visafe giúp kiểm tra các nguy hại, mã độc, quảng cáo & theo dõi trên thiết bị của bạn."
         case .protect:
             return "Đang bật chế độ bảo vệ Visafe"
         case .wifi:
