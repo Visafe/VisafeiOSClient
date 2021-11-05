@@ -70,9 +70,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
 
-//        if CacheManager.shared.getDailyReport() == nil {
-//            CacheManager.shared.setDailyReport(value: true)
-//        }
     }
     
     func configKeyboard() {

@@ -29,6 +29,7 @@ let kVIP = "kVIP"
 let kDNServer = "kDNServer"
 let kDailyReport = "kDailyReport"
 let kNCSCReport = "kNCSCReport"
+let kDoHStatus = "kDoHStatus"
 
 class CacheManager {
     
@@ -241,6 +242,19 @@ class CacheManager {
 
     func setNCSCReport(value: Bool) {
         userDefault.set(value, forKey: kNCSCReport)
+        userDefault.synchronize()
+    }
+
+    func getDohStatus() -> Bool? {
+        if userDefault.object(forKey: kDoHStatus) == nil {
+            return nil
+        }
+        let value = userDefault.bool(forKey: kDoHStatus)
+        return value
+    }
+
+    func setDohStatus(value: Bool) {
+        userDefault.set(value, forKey: kDoHStatus)
         userDefault.synchronize()
     }
 }

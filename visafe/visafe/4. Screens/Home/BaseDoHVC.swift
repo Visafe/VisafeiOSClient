@@ -30,7 +30,7 @@ class BaseDoHVC: BaseViewController {
                 }
             } else {
                 self.isConnecting = false
-                handleSaveSuccess()
+                DoHNative.shared.onOffDoH(true)
             }
         } else {
             DoHNative.shared.saveDNS {[weak self] (error) in
@@ -45,20 +45,8 @@ class BaseDoHVC: BaseViewController {
     }
 
     func offDoH() {
-        if #available(iOS 14.0, *) {
-            DoHNative.shared.removeDnsManager {[weak self] (error) in
-                if let _error = error {
-                    self?.isConnecting = false
-                    self?.handleSaveError(_error)
-                    return
-                }
-                self?.isConnecting = false
-                DoHNative.shared.saveDNS {[weak self] (_) in}
-            }
-        } else {
-            // Fallback on earlier versions
-            self.isConnecting = false
-        }
+        DoHNative.shared.onOffDoH(false)
+        isConnecting = false
     }
 
     func gotoEnterPin() {

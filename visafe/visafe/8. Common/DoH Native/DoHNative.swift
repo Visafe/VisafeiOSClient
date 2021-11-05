@@ -18,7 +18,7 @@ class DoHNative {
                 if canPushNoti {
                     pushNoti()
                 }
-
+                CacheManager.shared.setDohStatus(value: isEnabled)
             }
         }
     }
@@ -47,6 +47,8 @@ class DoHNative {
                 let dohSetting = NEDNSOverHTTPSSettings(servers: [])
                 dohSetting.serverURL = URL(string: Common.getDnsServer())
                 NEDNSSettingsManager.shared().dnsSettings = dohSetting
+                let status = NEOnDemandRuleConnect()
+                NEDNSSettingsManager.shared().onDemandRules = [status]
                 NEDNSSettingsManager.shared().saveToPreferences { (saveError) in
                     if let _error = saveError {
                         onSavedStatus(nil)
@@ -63,11 +65,17 @@ class DoHNative {
         loadDnsManager { dnsManager in
             guard let manager = dnsManager else {
                 self.isInstalled = false
+                if CacheManager.shared.getDohStatus() == nil {
+                    CacheManager.shared.setDohStatus(value: false)
+                }
                 self.isEnabled = false
                 return
             }
             self.isInstalled = manager.dnsSettings != nil
-            self.isEnabled = manager.isEnabled
+            if CacheManager.shared.getDohStatus() == nil {
+                CacheManager.shared.setDohStatus(value: true)
+            }
+            self.isEnabled = CacheManager.shared.getDohStatus() ?? false
         }
     }
 
@@ -78,9 +86,7 @@ class DoHNative {
                 return
             }
             (manager.dnsSettings as? NEDNSOverHTTPSSettings)?.serverURL = URL(string: Common.getDnsServer())
-            manager.saveToPreferences { _ in
-
-            }
+            manager.saveToPreferences { _ in }
         }
     }
 
@@ -109,6 +115,19 @@ class DoHNative {
                 // Check manager status after delete
                 self?.getDnsManagerStatus()
             }
+        }
+    }
+
+    func onOffDoH(_ isOn: Bool) {
+        loadDnsManager { [weak self] dnsManager in
+            guard let dnsManager = dnsManager else {
+                onErrorReceived(NativeDnsProviderError.failedToLoadManager)
+                return
+            }
+            let status = isOn ? NEOnDemandRuleConnect(): NEOnDemandRuleDisconnect()
+            dnsManager.onDemandRules = [status]
+            manager.saveToPreferences { _ in }
+            isEnabled = isOn
         }
     }
 }
