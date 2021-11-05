@@ -29,8 +29,8 @@ class TabbarVC: BaseTabbarController {
     
     func configView() {
         
-        protectVC.title = "Bảo vệ"
-        let tab1 = UITabBarItem(title: "Bảo vệ", image: UIImage(named: "protect_tabbar"), selectedImage: UIImage(named: "protect_tabbar"))
+        protectVC.title = "Trang chủ"
+        let tab1 = UITabBarItem(title: "Trang chủ", image: UIImage(named: "ic_home"), selectedImage: UIImage(named: "ic_home"))
         tab1.tag = 1
         protectVC.tabBarItem = tab1
         let protectNav = BaseNavigationController(rootViewController: protectVC)
