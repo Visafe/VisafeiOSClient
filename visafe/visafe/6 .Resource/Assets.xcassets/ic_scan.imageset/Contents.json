@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "ic_scan.png",
+      "filename" : "i.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "ic_scan@2x.png",
+      "filename" : "Shield Done.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "ic_scan@3x.png",
+      "filename" : "Shield Done-1.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
