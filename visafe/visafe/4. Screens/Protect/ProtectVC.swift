@@ -143,7 +143,7 @@ class ProtectVC: BaseDoHVC {
         registerInfoView.dropShadowEdge()
         otherView.dropShadowEdge()
         let isLogin = CacheManager.shared.getIsLogined()
-        protectAdAndFollowStackView.isHidden = !isLogin
+        protectAdAndFollowStackView.isHidden = true//!isLogin
         overView.isHidden = !isLogin
         protectFamilyView.isHidden = !isLogin
         registerInfoView.isHidden = true//!isLogin
@@ -151,7 +151,10 @@ class ProtectVC: BaseDoHVC {
 
     private func setSafeMode() {
         let font = UIFont.systemFont(ofSize: 20, weight: .semibold)
-        let scanNumberIssue = CacheManager.shared.getScanIssueNumber()
+        guard let scanNumberIssue = CacheManager.shared.getScanIssueNumber() else {
+            titleLB.text = "Thiết bị của bạn có an toàn?"
+            return
+        }
         let isTrue = scanNumberIssue == 0
         let highlightColor: UIColor = isTrue ? .systemGreen : .systemRed
         let text = isTrue ? "Bạn đang an toàn" : "Đã phát hiện \(scanNumberIssue) sự cố"
@@ -175,7 +178,7 @@ class ProtectVC: BaseDoHVC {
         }
         dispatchGroup.enter()
         dispatchGroup.enter()
-        GroupWorker.getGroup(id: groupId) { [weak self] (group, error) in
+        GroupWorker.getGroup(id: groupId) { [weak self] (group, error, responseCode) in
             guard let self = self else { return }
             self.groupModel = group
             self.dispatchGroup.leave()
@@ -203,7 +206,7 @@ class ProtectVC: BaseDoHVC {
             return
         }
         GroupWorker.getStatistic(grId: groupId,
-                                 limit: timeType.rawValue) { [weak self] (statistic, error) in
+                                 limit: timeType.rawValue) { [weak self] (statistic, error, responseCode) in
             guard let self = self else { return }
             self.statisticModel = statistic
             if leaveDispatchGroup {
@@ -218,7 +221,7 @@ class ProtectVC: BaseDoHVC {
     @objc func loginSuccess() {
         prepareData()
         let isLogin = CacheManager.shared.getIsLogined()
-        protectAdAndFollowStackView.isHidden = !isLogin
+        protectAdAndFollowStackView.isHidden = true//!isLogin
         overView.isHidden = !isLogin
         protectFamilyView.isHidden = !isLogin
         registerInfoView.isHidden = !isLogin
@@ -246,7 +249,7 @@ class ProtectVC: BaseDoHVC {
         if isShowloading {
             showLoading()
         }
-        GroupWorker.update(group: group) { [weak self] (group, error) in
+        GroupWorker.update(group: group) { [weak self] (group, error, responseCode) in
             guard let weakSelf = self else { return }
             weakSelf.hideLoading()
             if error == nil {

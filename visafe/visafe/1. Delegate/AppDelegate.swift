@@ -26,6 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             try Network.reachability = Reachability(hostname: "www.google.com")
         } catch {}
         genDeviceId()
+        appInit()
         configApplePush(application) // đăng ký nhận push.
         ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
         configRootVC()
@@ -33,6 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         googleAuthen()
         configKeyboard()
         handlePush(launchOptions: launchOptions)
+
         return true
     }
     
@@ -40,6 +42,37 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if launchOptions?[UIApplication.LaunchOptionsKey.remoteNotification] != nil {
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "kSelectTabNoti"), object: nil)
         }
+    }
+
+    func appInit() {
+        RoutingWorker.getDnsServer { data, _, _ in
+            guard let hostname = data?.hostname else {
+                CacheManager.shared.setDnsServer(value: dnsServer)
+                if #available(iOS 14.0, *) {
+                    DoHNative.shared.resetDnsSetting()
+                } else {
+                    // Fallback on earlier versions
+                }
+                return
+            }
+            var dns = hostname
+            if dns.last == "/" {
+                dns.removeLast()
+            }
+            if !dns.contains("https://") && !dns.contains("http://") {
+                dns = "https://" + dns + "/dns-query/%@"
+            }
+            CacheManager.shared.setDnsServer(value: dns)
+            if #available(iOS 14.0, *) {
+                DoHNative.shared.resetDnsSetting()
+            } else {
+                // Fallback on earlier versions
+            }
+        }
+
+//        if CacheManager.shared.getDailyReport() == nil {
+//            CacheManager.shared.setDailyReport(value: true)
+//        }
     }
     
     func configKeyboard() {
@@ -60,10 +93,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         else if (ApplicationDelegate.shared.application(app, open: url, sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String, annotation: options[UIApplication.OpenURLOptionsKey.annotation] )) {
             return true
-        } else if url.absoluteString.checkInviteDevicelink() != nil {
-            handleUniversallink(code: url.absoluteString)
+        } else if url.absoluteString.contains("firebase.visafe.vn") {
+            DynamicLinks.dynamicLinks().handleUniversalLink(url) {[weak self] dynamiclink, error in
+                guard let _url = dynamiclink?.url else { return }
+                if _url.absoluteString.checkInviteDevicelink() != nil {
+                    self?.handleUniversallink(code: _url.absoluteString)
+                } else if _url.absoluteString.checkPaymentlink() != nil {
+                    self?.handlePaymentLink(code: _url.absoluteString)
+                }
+            }
             return true
         }
+
         return false
     }
     
@@ -71,57 +112,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         guard let link = code.checkInviteDevicelink() else { return }
         let param = Common.getDeviceInfo()
         param.updateGroupInfo(link: link)
-        // create the actual alert controller view that will be the pop-up
-        let alertController = UIAlertController(title: "Xác nhận tham gia", message: "Bạn có chắc chắn muốn tham gia nhóm <" + (param.groupName ?? "") + "> với tên là:", preferredStyle: .alert)
-        alertController.addTextField { (textField) in
-            // configure the properties of the text field
-            textField.placeholder = "Tên thiết bị"
-        }
-        alertController.textFields![0].text = param.deviceName
-        // add the buttons/actions to the view controller
-        let saveAction = UIAlertAction(title: "Đồng ý", style: .cancel) { [weak self] alert in
-            guard let weakSelf = self else { return }
-            let inputName = alertController.textFields![0].text
-            param.deviceName = inputName
-            weakSelf.addDeviceToGroup(device: param)
-        }
-        let cancelAction = UIAlertAction(title: "Hủy bỏ", style: .default, handler: nil)
-        alertController.addAction(saveAction)
-        alertController.addAction(cancelAction)
-        self.window?.rootViewController?.present(alertController, animated: true, completion: nil)
-    }
-    
-    func addDeviceToGroup(device: AddDeviceToGroupParam) {
-        GroupWorker.addDevice(param: device) { [weak self] (result, error) in
-            guard let weakSelf = self else { return }
-            if result?.status_code == .success {
-                let alert = UIAlertController(title: "Thông báo", message: "Tham gia nhóm thành công" , preferredStyle: UIAlertController.Style.alert)
-                let okAction = UIAlertAction(title: "Xác nhận", style: UIAlertAction.Style.default) { _ in }
-                // add an action (button)
-                alert.addAction(okAction)
-                // show the alert
-                weakSelf.window?.rootViewController?.present(alert, animated: true, completion: nil)
-            } else {
-                let type = result?.status_code ?? .defaultStatus
-                let message_alert = type.getDescription()
-                let alert = UIAlertController(title: "Thông báo", message: message_alert , preferredStyle: UIAlertController.Style.alert)
-                let okAction = UIAlertAction(title: "Xác nhận", style:
-                                                UIAlertAction.Style.default) { _ in }
-                // add an action (button)
-                alert.addAction(okAction)
-                // show the alert
-                weakSelf.window?.rootViewController?.present(alert, animated: true, completion: nil)
-            }
-        }
+        let vc = JoinGroupVC(param: param)
+        let nav = BaseNavigationController(rootViewController: vc)
+        self.window?.rootViewController?.present(nav, animated: true, completion: nil)
     }
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         Messaging.messaging().apnsToken = deviceToken
+
+//        Messaging.messaging().subscribe(toTopic: "topicName")
+
+//        Messaging.messaging().unsubscribe(fromTopic: "topicName")
     }
     
     func postSendToken(token: String?) {
         // regiser token
-        DeviceWorker.registerDevice(token: token) { (result, error) in }
+        DeviceWorker.registerDevice(token: token) { (result, error, responseCode) in }
     }
 
     func configApplePush(_ application: UIApplication) {
@@ -170,21 +176,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
         if userActivity.activityType == NSUserActivityTypeBrowsingWeb {
-            let url = userActivity.webpageURL!
-            if url.absoluteString.checkInviteDevicelink() != nil {
-                handleUniversallink(code: url.absoluteString)
-                return true
-            } else if url.absoluteString.checkPaymentlink() != nil {
-                handlePaymentLink(code: url.absoluteString)
-                return true
+            guard let url = userActivity.webpageURL else { return true }
+            DynamicLinks.dynamicLinks().handleUniversalLink(url) {[weak self] dynamiclink, error in
+                guard let _url = dynamiclink?.url else { return }
+                if _url.absoluteString.checkInviteDevicelink() != nil {
+                    self?.handleUniversallink(code: _url.absoluteString)
+                } else if _url.absoluteString.checkPaymentlink() != nil {
+                    self?.handlePaymentLink(code: _url.absoluteString)
+                }
             }
         }
         return true
     }
-    
+
     func genDeviceId() {
         if !CacheManager.shared.isDeviceIdExist() {
-            DeviceWorker.genDeviceId { (result, error) in
+            DeviceWorker.genDeviceId { (result, error, responseCode) in
                 if let deviceId = result?.deviceId {
                     CacheManager.shared.setDeviceId(value: deviceId)
                 }

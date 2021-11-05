@@ -88,7 +88,9 @@ enum APIRouter {
     case checkDevice
     case requestOutGroup(groupId: String)
     case activeVip(key: String)
+    case changeUseProfile(param: ChangeProfileParam)
 
+    case routing
 }
 
 extension APIError: LocalizedError {
@@ -225,6 +227,10 @@ extension APIRouter: TargetType {
             return "/device/request-out-group"
         case .activeVip:
             return "/device/active-vip"
+        case .changeUseProfile:
+            return "/user/change-profile"
+        case .routing:
+            return "/routing"
         }
     }
     
@@ -233,7 +239,7 @@ extension APIRouter: TargetType {
         case .getListWorkspace, .profile, .getGroups, .listNotification,
              .statisticWorkspace, .statisticGroup,
              .logGroup, .logWorkspace, .genDeviceId, .getGroup, .packages,
-             .iosVersion:
+             .iosVersion, .routing:
             return .get
         case .deleteWorkspace, .deleteGroup,
              .groupDeleteUser, .deleteDeviceFromGroup, .deleteDeviceGroup:
@@ -241,7 +247,7 @@ extension APIRouter: TargetType {
         case .updateWorkspace, .updateNameWorkspace,
              .updateGroup, .updateNameGroup,
              .groupUpdateWhitelist, .groupUserToViewer,
-             .groupUserToManager, .updateDeviceGroup, .changePassword:
+             .groupUserToManager, .updateDeviceGroup, .changePassword, .changeUseProfile:
             return .patch
         default:
             break
@@ -371,7 +377,11 @@ extension APIRouter: TargetType {
         case .activeVip(key: let key):
             pars["deviceId"] = CacheManager.shared.getDeviceId()
             pars["key"] = key
-        case .reactivation, .getListWorkspace, .profile, .genDeviceId, .checkBotNet, .packages:
+        case .changeUseProfile(param: let param):
+            pars = param.toJSON()
+        case .reactivation, .getListWorkspace,
+             .profile, .genDeviceId, .checkBotNet,
+             .packages, .routing:
             break
         }
         return pars
@@ -379,7 +389,7 @@ extension APIRouter: TargetType {
     
     var task: Task {
         switch self {
-        case .register, .login, .resetPassword, .changePassword, .changeProfile, .reactivation, .addWorkspace, .updateWorkspace, .updateNameWorkspace, .addGroup, .updateGroup, .updateNameGroup, .deleteGroup, .addDeviceGroup, .deleteDeviceGroup, .createIdentifier, .updateIdentifier, .deleteIdentifier, .addDeviceToIden, .deleteDeviceToIden,.inviteToGroup, .deleteGroupMember, .changeManagerPermision, .changeViewerPermision, .activeAccount, .deleteWorkspace, .loginFacebook, .loginGoogle, .forgotPassword, .groupUpdateWhitelist, .groupUserToManager, .groupUserToViewer, .groupDeleteUser, .deleteLog, .loginApple, .deleteDeviceFromGroup, .updateDeviceGroup, .registerDevice, .readNotification, .order, .checkBotNet, .reportPhishing, .checkDevice, .requestOutGroup, .activeVip:
+        case .register, .login, .resetPassword, .changePassword, .changeProfile, .reactivation, .addWorkspace, .updateWorkspace, .updateNameWorkspace, .addGroup, .updateGroup, .updateNameGroup, .deleteGroup, .addDeviceGroup, .deleteDeviceGroup, .createIdentifier, .updateIdentifier, .deleteIdentifier, .addDeviceToIden, .deleteDeviceToIden,.inviteToGroup, .deleteGroupMember, .changeManagerPermision, .changeViewerPermision, .activeAccount, .deleteWorkspace, .loginFacebook, .loginGoogle, .forgotPassword, .groupUpdateWhitelist, .groupUserToManager, .groupUserToViewer, .groupDeleteUser, .deleteLog, .loginApple, .deleteDeviceFromGroup, .updateDeviceGroup, .registerDevice, .readNotification, .order, .checkBotNet, .reportPhishing, .checkDevice, .requestOutGroup, .activeVip, .changeUseProfile:
             return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
         default:
             break
@@ -394,7 +404,7 @@ extension APIRouter: TargetType {
     var headers: [String : String]? {
         var hea: [String: String] = [:]
         switch self {
-        case .getListWorkspace, .addWorkspace, .updateWorkspace, .deleteWorkspace, .updateNameWorkspace, .addGroup, .updateGroup, .updateNameGroup, .deleteGroup, .deleteDeviceGroup, .createIdentifier, .updateIdentifier, .deleteIdentifier, .getIdentifier, .addDeviceToIden, .deleteDeviceToIden, .inviteToGroup, .deleteGroupMember, .changeManagerPermision, .changeViewerPermision, .profile, .getGroups, .listNotification, .statisticWorkspace, .statisticGroup, .logGroup, .logWorkspace, .groupUpdateWhitelist, .groupUserToViewer, .groupUserToManager, .groupDeleteUser, .deleteLog, .deleteDeviceFromGroup, .updateDeviceGroup, .getGroup, .readNotification, .packages, .order, .reportPhishing, .changePassword, .checkDevice, .requestOutGroup, .activeVip:
+        case .getListWorkspace, .addWorkspace, .updateWorkspace, .deleteWorkspace, .updateNameWorkspace, .addGroup, .updateGroup, .updateNameGroup, .deleteGroup, .deleteDeviceGroup, .createIdentifier, .updateIdentifier, .deleteIdentifier, .getIdentifier, .addDeviceToIden, .deleteDeviceToIden, .inviteToGroup, .deleteGroupMember, .changeManagerPermision, .changeViewerPermision, .profile, .getGroups, .listNotification, .statisticWorkspace, .statisticGroup, .logGroup, .logWorkspace, .groupUpdateWhitelist, .groupUserToViewer, .groupUserToManager, .groupDeleteUser, .deleteLog, .deleteDeviceFromGroup, .updateDeviceGroup, .getGroup, .readNotification, .packages, .order, .reportPhishing, .changePassword, .checkDevice, .requestOutGroup, .activeVip, .changeUseProfile:
             hea["Authorization"] = (CacheManager.shared.getLoginResult()?.token ?? "")
         default:
             break

@@ -306,6 +306,8 @@ class GroupModel: NSObject, Mappable {
     var safebrowsing_enabled: Bool?
     var disallowed_rule: String = ""
     var link_invite_device: String?
+    var local_msg: String?
+    var websiteType: GroupWebsiteSettingHeaderEnum = .block
     
     override init() {
         super.init()
@@ -348,12 +350,13 @@ class GroupModel: NSObject, Mappable {
         days <- map["days"]
         times <- map["times"]
         devicesGroupInfo <- map["devicesGroupInfo"]
-        whitelist <- map["WhiteList"]
+        whitelist <- map["white_list"]
         filtering_enabled <- map["filtering_enabled"]
         log_enabled <- map["log_enabled"]
         safebrowsing_enabled <- map["safebrowsing_enabled"]
         disallowed_rule <- map["disallowed_rule"]
         link_invite_device <- map["link_invite_device"]
+        local_msg <- map["local_msg"]
     }
     
     func buildModelsAppAds(value: [String]) -> [AppAdsModel] {
@@ -433,8 +436,8 @@ class GroupModel: NSObject, Mappable {
             // Website
             let m6 = PostGroupModel()
             m6.type = .website
-            m6.isSelected = (block_webs.count > 0)
-            m6.children = block_webs
+            m6.isSelected = true
+            m6.children = websiteType == .block ? block_webs : whitelist
             sources.append(m6)
             return sources
         } else if type == .content_blocked {
@@ -493,10 +496,10 @@ class GroupModel: NSObject, Mappable {
                     app_ads = []
                 }
             case .website:
-                if model.isSelected ?? false {
+                if websiteType == .block {
                     block_webs = model.children as? [String] ?? []
                 } else {
-                    block_webs = []
+                    whitelist = model.children as? [String] ?? []
                 }
             case .nativetracking:
                 if model.isSelected ?? false {

@@ -110,18 +110,6 @@ extension String {
             !self.contains("groupName") {
             return nil
         }
-        if(self[56] != "=" || self[93] != "&") {
-            return nil
-        }
-        var count: Int = 0
-        for i in 56...93 {
-            if(self[i] == "-") {
-                count = count + 1
-            }
-        }
-        if(count != 4) {
-            return nil
-        }
         return self
         
     }
@@ -143,6 +131,13 @@ extension String {
     
     func getGroupName(text: String) -> String {
         return text.substring(fromIndex: 114)
+    }
+
+    func encodeUrl() -> String? {
+        return self.addingPercentEncoding( withAllowedCharacters: NSCharacterSet.urlQueryAllowed)
+    }
+    func decodeUrl() -> String? {
+        return self.removingPercentEncoding
     }
 }
 

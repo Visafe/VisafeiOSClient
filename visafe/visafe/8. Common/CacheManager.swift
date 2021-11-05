@@ -26,6 +26,9 @@ let kNotification = "kNotification"
 let kScanIssueNumber = "kScanIssueNumber"
 let kFCMToken = "kFCMToken"
 let kVIP = "kVIP"
+let kDNServer = "kDNServer"
+let kDailyReport = "kDailyReport"
+let kNCSCReport = "kNCSCReport"
 
 class CacheManager {
     
@@ -177,9 +180,13 @@ class CacheManager {
         userDefault.synchronize()
     }
 
-    func getScanIssueNumber() -> Int {
-        let value = userDefault.integer(forKey: kScanIssueNumber)
-        return value
+    func getScanIssueNumber() -> Int? {
+        if let a = userDefault.object(forKey: kScanIssueNumber) as? Int {
+            return a
+        }
+        return nil
+//        let value = userDefault.integer(forKey: kScanIssueNumber)
+//        return value
     }
 
     func setScanIssueNumber(value: Int) {
@@ -204,6 +211,36 @@ class CacheManager {
 
     func setVipStatus(value: String?) {
         userDefault.set(value, forKey: kVIP)
+        userDefault.synchronize()
+    }
+
+    func getDnsServer() -> String? {
+        let value = userDefault.string(forKey: kDNServer)
+        return value
+    }
+
+    func setDnsServer(value: String?) {
+        userDefault.set(value, forKey: kDNServer)
+        userDefault.synchronize()
+    }
+
+    func getDailyReport() -> Bool? {
+        let value = userDefault.bool(forKey: kDailyReport)
+        return value
+    }
+
+    func setDailyReport(value: Bool) {
+        userDefault.set(value, forKey: kDailyReport)
+        userDefault.synchronize()
+    }
+
+    func getNCSCReport() -> Bool? {
+        let value = userDefault.bool(forKey: kNCSCReport)
+        return value
+    }
+
+    func setNCSCReport(value: Bool) {
+        userDefault.set(value, forKey: kNCSCReport)
         userDefault.synchronize()
     }
 }
