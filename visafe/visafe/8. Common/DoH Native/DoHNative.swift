@@ -11,7 +11,7 @@ import NetworkExtension
 class DoHNative {
 
     static let shared = DoHNative()
-    var isEnabled = false {
+    var isEnabled = CacheManager.shared.getDohStatus() ?? false {
         didSet {
             if oldValue != isEnabled {
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: updateDnsStatus), object: nil)
@@ -119,15 +119,18 @@ class DoHNative {
     }
 
     func onOffDoH(_ isOn: Bool) {
-        loadDnsManager { [weak self] dnsManager in
-            guard let dnsManager = dnsManager else {
-                onErrorReceived(NativeDnsProviderError.failedToLoadManager)
-                return
+        if #available(iOS 14.0, *) {
+            loadDnsManager { [weak self] dnsManager in
+                guard let dnsManager = dnsManager else {
+                    return
+                }
+                let status = isOn ? NEOnDemandRuleConnect(): NEOnDemandRuleDisconnect()
+                dnsManager.onDemandRules = [status]
+                dnsManager.saveToPreferences { _ in }
+                self?.isEnabled = isOn
             }
-            let status = isOn ? NEOnDemandRuleConnect(): NEOnDemandRuleDisconnect()
-            dnsManager.onDemandRules = [status]
-            manager.saveToPreferences { _ in }
-            isEnabled = isOn
+        } else {
+            // Fallback on earlier versions
         }
     }
 }

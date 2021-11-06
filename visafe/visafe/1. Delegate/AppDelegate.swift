@@ -26,6 +26,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             try Network.reachability = Reachability(hostname: "www.google.com")
         } catch {}
         genDeviceId()
+        if CacheManager.shared.getDohStatus() == nil {
+            CacheManager.shared.setDohStatus(value: false)
+        }
         appInit()
         configApplePush(application) // đăng ký nhận push.
         ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
