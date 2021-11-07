@@ -86,9 +86,9 @@ public enum ProfileHelpNowEnum: Int {
         case .email:
             return "ncsc@ais.gov.vn"
         case .messenger:
-            return "m.me/govSOC"
+            return "m.me/visafe.vn"
         case .facebook:
-            return "fb.com/govSOC"
+            return "fb.com/visafe.vn"
         }
     }
 }
@@ -211,13 +211,13 @@ extension ProfileHelpVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func showLinkFb(fb: String) {
-        if let url = URL(string: "https://www.fb.com/govSOC") {
+        if let url = URL(string: "https://www.fb.com/visafe.vn") {
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }
     }
     
     func showLinkMessager(mes: String) {
-        if let url = URL(string: "https://www.m.me/govSOC") {
+        if let url = URL(string: "https://www.m.me/visafe.vn") {
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }
     }
