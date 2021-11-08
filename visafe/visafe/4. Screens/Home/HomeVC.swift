@@ -60,7 +60,8 @@ class HomeVC: BaseDoHVC {
         super.viewWillAppear(animated)
         setNeedsStatusBarAppearanceUpdate()
         self.navigationController?.isNavigationBarHidden = true
-        if !DoHNative.shared.isInstalled || !DoHNative.shared.isEnabled {
+        let status = CacheManager.shared.getDohStatus() ?? false
+        if !DoHNative.shared.isInstalled || !DoHNative.shared.isEnabled || !status {
             showAnimationConnectLoading()
         }
         homeLoadingImage.rotate()
@@ -114,7 +115,8 @@ class HomeVC: BaseDoHVC {
     }
 
     @objc func updateUI() {
-        let isEnabled = DoHNative.shared.isEnabled
+        let localStatus = CacheManager.shared.getDohStatus() ?? false
+        let isEnabled = DoHNative.shared.isEnabled && localStatus
         firstLabel.text = isEnabled ? "": "Bấm "
         lastLabel.text = isEnabled ? "Đang được bảo vệ": " để bật tính năng bảo vệ"
         desImageView.image = isEnabled ? UIImage(named: "Shield_Done"): UIImage(named: "power")

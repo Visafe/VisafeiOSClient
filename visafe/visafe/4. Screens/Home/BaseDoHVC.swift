@@ -20,18 +20,28 @@ class BaseDoHVC: BaseViewController {
     }
 
     func onOffDoH() {
+        let localStatus = CacheManager.shared.getDohStatus() ?? false
         DoHNative.shared.canPushNoti = true
         if DoHNative.shared.isInstalled {
-            if DoHNative.shared.isEnabled {
-                if CacheManager.shared.getPin() != nil {
-                    gotoEnterPin()
+            if localStatus {
+                if DoHNative.shared.isEnabled {
+                    if CacheManager.shared.getPin() != nil {
+                        gotoEnterPin()
+                    } else {
+                        offDoH()
+                    }
                 } else {
                     offDoH()
                 }
             } else {
-                self.isConnecting = false
-                DoHNative.shared.onOffDoH(true, handleSaveSuccess)
+                isConnecting = false
+                if DoHNative.shared.isEnabled {
+                    DoHNative.shared.onOffDoH(true, handleSaveSuccess)
+                } else {
+                    DoHNative.shared.onOffDoH(true, handleSaveSuccess)
+                }
             }
+
         } else {
             DoHNative.shared.saveDNS {[weak self] (error) in
                 if let _error = error {

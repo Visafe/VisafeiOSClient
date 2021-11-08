@@ -119,7 +119,8 @@ class ProtectVC: BaseDoHVC {
         self.navigationController?.isNavigationBarHidden = true
         isSetupPin = CacheManager.shared.getPin() != nil
         isProtectWifi = CacheManager.shared.getProtectWifiStatus()
-        isProtectDevice = DoHNative.shared.isEnabled
+        let status = CacheManager.shared.getDohStatus() ?? false
+        isProtectDevice = DoHNative.shared.isEnabled && status
         setSafeMode()
         if !isPreparingData {
             prepareData(false)
@@ -239,7 +240,8 @@ class ProtectVC: BaseDoHVC {
     }
 
     @objc private func updateProtectDevice() {
-        isProtectDevice = DoHNative.shared.isEnabled
+        let status = CacheManager.shared.getDohStatus() ?? false
+        isProtectDevice = DoHNative.shared.isEnabled && status
     }
 
     private func updateGroup(_ isShowloading: Bool = true) {

@@ -11,14 +11,14 @@ import NetworkExtension
 class DoHNative {
 
     static let shared = DoHNative()
-    var isEnabled = CacheManager.shared.getDohStatus() ?? false {
+    var isEnabled = false {
         didSet {
             if oldValue != isEnabled {
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: updateDnsStatus), object: nil)
                 if canPushNoti {
                     pushNoti()
                 }
-                CacheManager.shared.setDohStatus(value: isEnabled)
+
             }
         }
     }
@@ -26,7 +26,8 @@ class DoHNative {
     var isInstalled = false
 
     func pushNoti() {
-        let isEnabled = DoHNative.shared.isEnabled
+        let localStatus = CacheManager.shared.getDohStatus() ?? false
+        let isEnabled = DoHNative.shared.isEnabled && localStatus
         let content = UNMutableNotificationContent()
         content.title = isEnabled ? "Đã kích hoạt chế độ bảo vệ!": "Bạn đã tắt chế độ bảo vệ"
         content.body = isEnabled ? "Chế độ chống lừa đảo, mã độc, tấn công mạng đã được kích hoạt!": "Thiết bị của bạn có thể bị ảnh hưởng bởi tấn công mạng"
@@ -65,21 +66,11 @@ class DoHNative {
         loadDnsManager { dnsManager in
             guard let manager = dnsManager else {
                 self.isInstalled = false
-                if CacheManager.shared.getDohStatus() == nil || !self.isEnabled {
-                    CacheManager.shared.setDohStatus(value: false)
-                }
                 self.isEnabled = false
                 return
             }
             self.isInstalled = manager.dnsSettings != nil
-            if manager.isEnabled {
-                if CacheManager.shared.getDohStatus() == nil {
-                    CacheManager.shared.setDohStatus(value: true)
-                }
-                self.isEnabled = CacheManager.shared.getDohStatus() ?? false
-            } else {
-                self.isEnabled = false
-            }
+            self.isEnabled = manager.isEnabled
         }
     }
 
@@ -131,13 +122,18 @@ class DoHNative {
                 let status = isOn ? NEOnDemandRuleConnect(): NEOnDemandRuleDisconnect()
                 dnsManager.onDemandRules = [status]
                 dnsManager.saveToPreferences { _ in }
-                if dnsManager.isEnabled {
-                    self?.isEnabled = isOn
-                } else {
-                    self?.isEnabled = false
-                    showWarning?()
+                let oldValue = CacheManager.shared.getDohStatus() ?? false
+                CacheManager.shared.setDohStatus(value: isOn)
+                if oldValue != isOn {
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: updateDnsStatus), object: nil)
                 }
-                
+                if !dnsManager.isEnabled {
+                    if isOn {
+                        showWarning?()
+                    }
+                } else {
+                    self?.pushNoti()
+                }
             }
         } else {
             // Fallback on earlier versions

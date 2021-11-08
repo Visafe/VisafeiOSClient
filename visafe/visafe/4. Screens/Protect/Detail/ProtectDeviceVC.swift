@@ -61,8 +61,8 @@ class ProtectDeviceVC: HeaderedPageMenuScrollWithDoHViewController, CAPSPageMenu
     func configView() {
         header = ProtectHomeHeaderView.loadFromNib()
         header.bindingData(type: type)
-
-        let isOn = type == .device ? DoHNative.shared.isEnabled: CacheManager.shared.getProtectWifiStatus()
+        let status = CacheManager.shared.getDohStatus() ?? false
+        let isOn = type == .device ? (DoHNative.shared.isEnabled && status): CacheManager.shared.getProtectWifiStatus()
         header.updateState(isOn: isOn)
 
         header.switchValueChange = { [weak self] isOn in
@@ -122,12 +122,14 @@ class ProtectDeviceVC: HeaderedPageMenuScrollWithDoHViewController, CAPSPageMenu
 
     override func hideAnimationLoading() {
         hideLoading()
-        listBlockVC.setProtect(DoHNative.shared.isEnabled)
-        header.updateState(isOn: DoHNative.shared.isEnabled)
+        let status = CacheManager.shared.getDohStatus() ?? false
+        listBlockVC.setProtect(DoHNative.shared.isEnabled && status)
+        header.updateState(isOn: DoHNative.shared.isEnabled && status)
     }
 
     @objc private func updateProtectDevice() {
-        listBlockVC.setProtect(DoHNative.shared.isEnabled)
-        header.updateState(isOn: DoHNative.shared.isEnabled)
+        let status = CacheManager.shared.getDohStatus() ?? false
+        listBlockVC.setProtect(DoHNative.shared.isEnabled && status)
+        header.updateState(isOn: DoHNative.shared.isEnabled && status)
     }
 }

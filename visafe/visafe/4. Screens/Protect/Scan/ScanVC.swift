@@ -116,7 +116,8 @@ class ScanVC: BaseViewController {
     func scan() {
         switch type {
         case .protect:
-            scanSuccess?(DoHNative.shared.isEnabled, type)
+            let status = CacheManager.shared.getDohStatus() ?? false
+            scanSuccess?(DoHNative.shared.isEnabled && status, type)
         case .wifi:
             checkBotNet()
         case .protocoll:
