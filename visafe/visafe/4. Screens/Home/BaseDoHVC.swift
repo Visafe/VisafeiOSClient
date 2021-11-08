@@ -85,7 +85,7 @@ class BaseDoHVC: BaseViewController {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
 //            self.stoprotate()
             self.showWarning(title: "Thông báo",
-                             content: "Vui lòng vào Cài đặt -> Cài đặt chung -> VPN -> DNS để cài chọn Visafe") {
+                             content: "B1: Mở Cài đặt -> Cài đặt chung -> Quản lý VPN & thiết bị -> DNS \nB2: Thay đổi cấu hình DNS từ Tự động sang Visafe") {
                 guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
                             return
                         }
