@@ -72,10 +72,14 @@ class DoHNative {
                 return
             }
             self.isInstalled = manager.dnsSettings != nil
-            if CacheManager.shared.getDohStatus() == nil {
-                CacheManager.shared.setDohStatus(value: true)
+            if manager.isEnabled {
+                if CacheManager.shared.getDohStatus() == nil {
+                    CacheManager.shared.setDohStatus(value: true)
+                }
+                self.isEnabled = CacheManager.shared.getDohStatus() ?? false
+            } else {
+                self.isEnabled = false
             }
-            self.isEnabled = CacheManager.shared.getDohStatus() ?? false
         }
     }
 
@@ -118,7 +122,7 @@ class DoHNative {
         }
     }
 
-    func onOffDoH(_ isOn: Bool) {
+    func onOffDoH(_ isOn: Bool, _ showWarning: (() -> Void)?) {
         if #available(iOS 14.0, *) {
             loadDnsManager { [weak self] dnsManager in
                 guard let dnsManager = dnsManager else {
@@ -127,7 +131,13 @@ class DoHNative {
                 let status = isOn ? NEOnDemandRuleConnect(): NEOnDemandRuleDisconnect()
                 dnsManager.onDemandRules = [status]
                 dnsManager.saveToPreferences { _ in }
-                self?.isEnabled = isOn
+                if dnsManager.isEnabled {
+                    self?.isEnabled = isOn
+                } else {
+                    self?.isEnabled = false
+                    showWarning?()
+                }
+                
             }
         } else {
             // Fallback on earlier versions

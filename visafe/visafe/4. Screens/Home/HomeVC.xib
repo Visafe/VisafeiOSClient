@@ -120,6 +120,9 @@
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="T4E-mT-g0p"/>
+                    </constraints>
                 </stackView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HDp-oz-jA7">
                     <rect key="frame" x="16" y="712" width="343" height="50"/>

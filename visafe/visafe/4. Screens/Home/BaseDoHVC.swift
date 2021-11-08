@@ -30,7 +30,7 @@ class BaseDoHVC: BaseViewController {
                 }
             } else {
                 self.isConnecting = false
-                DoHNative.shared.onOffDoH(true)
+                DoHNative.shared.onOffDoH(true, handleSaveSuccess)
             }
         } else {
             DoHNative.shared.saveDNS {[weak self] (error) in
@@ -45,7 +45,7 @@ class BaseDoHVC: BaseViewController {
     }
 
     func offDoH() {
-        DoHNative.shared.onOffDoH(false)
+        DoHNative.shared.onOffDoH(false, handleSaveSuccess)
         isConnecting = false
     }
 
