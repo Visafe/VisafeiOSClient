@@ -82,9 +82,9 @@ class BaseDoHVC: BaseViewController {
     }
 
     func handleSaveSuccess() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+        DispatchQueue.main.asyncAfter(deadline: .now()) {
 //            self.stoprotate()
-            self.showWarning(title: "Hướng dẫn cài đặt DNS Visafe",
+            self.showWarning(title: "Hướng dẫn cài đặt Visafe",
                              content: "Mở Cài đặt -> Cài đặt chung -> Quản lý VPN & thiết bị -> DNS -> Chọn Visafe") {
                 guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
                             return
