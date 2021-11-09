@@ -55,6 +55,7 @@ class DoHNative {
                         onSavedStatus(nil)
                     } else {
                         onSavedStatus(nil)
+                        CacheManager.shared.setDohStatus(value: true)
                     }
                 }
             }
