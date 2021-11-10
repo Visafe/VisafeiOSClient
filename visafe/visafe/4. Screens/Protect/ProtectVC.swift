@@ -225,7 +225,7 @@ class ProtectVC: BaseDoHVC {
         protectAdAndFollowStackView.isHidden = true//!isLogin
         overView.isHidden = !isLogin
         protectFamilyView.isHidden = !isLogin
-        registerInfoView.isHidden = !isLogin
+//        registerInfoView.isHidden = !isLogin
     }
 
     private func bindingStatistic() {

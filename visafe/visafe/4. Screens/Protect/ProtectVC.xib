@@ -48,7 +48,7 @@
                     <rect key="frame" x="0.0" y="44" width="394" height="2022"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bG0-fL-wi6" userLabel="ContentView">
-                            <rect key="frame" x="0.0" y="0.0" width="394" height="1685"/>
+                            <rect key="frame" x="0.0" y="0.0" width="394" height="1479"/>
                             <subviews>
                                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="47d-Zg-pZK" userLabel="HeaderView">
                                     <rect key="frame" x="0.0" y="0.0" width="394" height="175"/>
@@ -376,7 +376,7 @@
                                     </userDefinedRuntimeAttributes>
                                 </view>
                                 <stackView opaque="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="hNm-Fx-mo4" userLabel="Detailview">
-                                    <rect key="frame" x="16" y="511" width="362" height="1158"/>
+                                    <rect key="frame" x="16" y="511" width="362" height="952"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="crZ-wr-lub" userLabel="OverView">
                                             <rect key="frame" x="0.0" y="0.0" width="362" height="180"/>
@@ -873,8 +873,8 @@
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
                                         </view>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iVh-E1-obm" userLabel="RegisterView">
-                                            <rect key="frame" x="0.0" y="652" width="362" height="190"/>
+                                        <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iVh-E1-obm" userLabel="RegisterView">
+                                            <rect key="frame" x="0.0" y="644" width="362" height="190"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6jG-y1-y0h" userLabel="UpgradeView">
                                                     <rect key="frame" x="0.0" y="0.0" width="362" height="190"/>
@@ -974,7 +974,7 @@
                                             </userDefinedRuntimeAttributes>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jhe-3X-lc4" userLabel="OtherView">
-                                            <rect key="frame" x="0.0" y="858" width="362" height="300"/>
+                                            <rect key="frame" x="0.0" y="652" width="362" height="300"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tiện ích an toàn thông tin" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hLG-D7-NXW">
                                                     <rect key="frame" x="8" y="24" width="236" height="24"/>
