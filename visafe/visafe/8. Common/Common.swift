@@ -33,13 +33,44 @@ class Common {
         return param
     }
 
+    class func GetDomainDOH() -> String {
+            let url = URL(string: "https://app.visafe.vn/api/v1/routing")
+            var domain_doh:String = "dns.visafe.vn"
+            guard let requestUrl = url else { fatalError() }
+            var request = URLRequest(url: requestUrl)
+            request.httpMethod = "GET"
+            request.timeoutInterval = 3000
+            let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+                if let error = error {
+                    print("Error took place \(error)")
+                    return
+                }
+                guard let data = data else {return}
+                do{
+                    let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as! [String: Any]
+                    DispatchQueue.main.async {
+                        if let httpResponse = response as? HTTPURLResponse{
+                            if httpResponse.statusCode == 200{
+                                domain_doh = json["hostname"] as! String
+                            }
+                        }
+                    }
+                }catch _{
+
+                }
+            }
+            task.resume()
+            return "https://" + domain_doh + "/dns-query/"
+        }
     class func getDnsServer() -> String {
         if let _vip = CacheManager.shared.getVipDOH() {
             return _vip + CacheManager.shared.getDeviceId()
         }
-        if let dns = CacheManager.shared.getDnsServer() {
-            return String(format: dns, CacheManager.shared.getDeviceId())
-        }
+//        if let dns = CacheManager.shared.getDnsServer() {
+//            return String(format: dns, CacheManager.shared.getDeviceId())
+//        }
+        let dnsServer = GetDomainDOH()
+        print(dnsServer + CacheManager.shared.getDeviceId())
         return String(format: dnsServer, CacheManager.shared.getDeviceId())
     }
 }
