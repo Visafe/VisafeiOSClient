@@ -456,6 +456,7 @@ extension ProtectVC {
     @IBAction func camnangmacOS(_ sender: Any) {
         gotoWebview("https://congcu.khonggianmang.vn/checklist-macos")
     }
+    
     private func gotoWebview(_ url: String) {
         let vc = WebViewVC()
         vc.url = url

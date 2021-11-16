@@ -11,7 +11,18 @@ class WebViewVC: BaseViewController {
         }
         let myRequest = URLRequest(url: myURL)
         webview.load(myRequest)
-        self.title = "Tiện ích bảo mật"
+        if (_url == "https://congcu.khonggianmang.vn/checklist-macos"
+        || _url == "https://congcu.khonggianmang.vn/checklist-windows"
+        || _url == "https://congcu.khonggianmang.vn/checklist-ios"
+        || _url == "https://congcu.khonggianmang.vn/checklist-android")
+        {
+            self.title = "Cẩm nang an toàn thông tin"
+        }
+        else
+        {
+            self.title = "Tiện ích an toàn thông tin"
+        }
+        
     }
 
     override func viewWillAppear(_ animated: Bool) {
