@@ -28,6 +28,20 @@ public enum GroupSettingParentEnum: Int {
             return UIImage(named: "block_vpn")
         }
     }
+    func getTitlePage() -> String {
+        switch self {
+        case .ads_blocked:
+            return "Quảng cáo đã chặn"
+        case .native_tracking:
+            return "Theo dõi đã chặn"
+        case .access_blocked:
+            return "Truy cập đã chặn"
+        case .content_blocked:
+            return "Nội dung đã chặn"
+        case .blockVPN:
+            return "VPN, Proxy đã chặn"
+        }
+    }
     
     func getTitle() -> String {
         switch self {
