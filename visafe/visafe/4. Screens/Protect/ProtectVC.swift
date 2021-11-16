@@ -444,7 +444,18 @@ extension ProtectVC {
     @IBAction func checkLead(_ sender: Any) {
         gotoWebview("https://congcu.khonggianmang.vn/check-data-leak")
     }
-
+    @IBAction func camnangAndroid(_ sender: Any) {
+        gotoWebview("https://congcu.khonggianmang.vn/checklist-android")
+    }
+    @IBAction func camnangiOS(_ sender: Any) {
+        gotoWebview("https://congcu.khonggianmang.vn/checklist-ios")
+    }
+    @IBAction func camnangWindows(_ sender: Any) {
+        gotoWebview("https://congcu.khonggianmang.vn/checklist-windows")
+    }
+    @IBAction func camnangmacOS(_ sender: Any) {
+        gotoWebview("https://congcu.khonggianmang.vn/checklist-macos")
+    }
     private func gotoWebview(_ url: String) {
         let vc = WebViewVC()
         vc.url = url

@@ -1276,28 +1276,28 @@
                                                     <rect key="frame" x="17" y="44" width="65" height="74"/>
                                                     <state key="normal" image="Android"/>
                                                     <connections>
-                                                        <action selector="CamNangAndroidWith_sender:" destination="-1" eventType="touchUpInside" id="yNl-8J-7LX"/>
+                                                        <action selector="camnangAndroid:" destination="-1" eventType="touchUpInside" id="IBP-VM-8pR"/>
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0pP-gw-R22">
                                                     <rect key="frame" x="106" y="44" width="65" height="74"/>
                                                     <state key="normal" image="iOS"/>
                                                     <connections>
-                                                        <action selector="CamNangiOSWith_sender:" destination="-1" eventType="touchUpInside" id="Nls-dP-WEV"/>
+                                                        <action selector="camnangiOS:" destination="-1" eventType="touchUpInside" id="aFF-zd-rnM"/>
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OPk-pv-1Wv">
                                                     <rect key="frame" x="284" y="45" width="65" height="72"/>
                                                     <state key="normal" image="macOS"/>
                                                     <connections>
-                                                        <action selector="CamNangMacOSWith_sender:" destination="-1" eventType="touchUpInside" id="TVJ-fn-ZpZ"/>
+                                                        <action selector="camnangmacOS:" destination="-1" eventType="touchUpInside" id="qoA-lj-8xP"/>
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DD3-sH-Wmm">
                                                     <rect key="frame" x="195" y="44" width="65" height="74"/>
                                                     <state key="normal" image="windows"/>
                                                     <connections>
-                                                        <action selector="CamNangWindowsWith_sender:" destination="-1" eventType="touchUpInside" id="Bbk-os-3ct"/>
+                                                        <action selector="camnangWindows:" destination="-1" eventType="touchUpInside" id="6Qv-4F-lfn"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
