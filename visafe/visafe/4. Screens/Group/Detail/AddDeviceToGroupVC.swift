@@ -34,7 +34,7 @@ class AddDeviceToGroupVC: BaseViewController {
     
     func configView() {
         guard let link = group.link_invite_device else { return }
-        guard let qrURLImage = URL(string: link)?.qrImage(using: UIColor(hexString: "021C5C")!, logo: UIImage(named: "ic_logo_qr")) else { return }
+        guard let qrURLImage = URL(string: link)?.qrImage(using: UIColor(hexString: "021C5C")!) else { return }
         qrCodeImageView.image = qrURLImage
         groupNameLabel.text = "Nhóm: \(group.name ?? "")"
         linkButton.setTitle(link, for: .normal)
