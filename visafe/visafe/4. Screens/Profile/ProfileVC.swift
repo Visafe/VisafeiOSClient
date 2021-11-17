@@ -89,10 +89,16 @@ class ProfileVC: BaseViewController {
     
     var sources: [ProfileEnum] = CacheManager.shared.getIsLogined() ? [.setting, .help, .share, .rate, .vipmember, .logout] : [.setting, .help, .share, .rate, .vipmember]
     
+    @IBOutlet weak var version_experiment: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(refreshData), name: NSNotification.Name(rawValue: kLoginSuccess), object: nil)
         configView()
+        let nsObject: AnyObject? = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as AnyObject
+
+        let version = nsObject as! String
+        
+        version_experiment.text = "Phiên bản thử nghiệm Visafe: " + version
     }
     
     @objc func refreshData() {
