@@ -76,9 +76,14 @@ public enum BlockServcieEnum: String {
     case netflix = "netflix"
     case reddit = "reddit"
     case _9gag = "9gag"
+    case youtube = "youtube"
+    case viber = "viber"
+    case telegram = "telegram"
+    case skype = "skype"
+    case snapchat = "snapchat"
     
     static func getAll() -> [BlockServcieEnum] {
-        return [.facebook, .zalo, .tiktok, .instagram, .tinder, .twitter, .netflix, .reddit, ._9gag]
+        return [.facebook, .zalo, .tiktok, .youtube,.viber, .telegram,.snapchat,.skype, .instagram, .tinder, .twitter, .netflix, .reddit, ._9gag]
     }
     
     func getTitle() -> String {
@@ -101,6 +106,16 @@ public enum BlockServcieEnum: String {
             return "Reddit"
         case ._9gag:
             return "9gag"
+        case .youtube:
+            return "YouTube"
+        case .telegram:
+            return "Telegram"
+        case .snapchat:
+            return "Snapchat"
+        case .viber:
+            return "Viber"
+        case .skype:
+            return "Skype"
         }
     }
     
