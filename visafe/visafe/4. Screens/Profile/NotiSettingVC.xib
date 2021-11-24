@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NotiSettingVC" customModule="visafe" customModuleProvider="target">
             <connections>
+                <outlet property="instruction" destination="TMY-sq-dal" id="dLE-4Q-WAG"/>
                 <outlet property="switch_dns_server" destination="aJW-kY-QeH" id="obh-xy-c53"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -105,15 +106,32 @@
                         </view>
                     </subviews>
                 </stackView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TMY-sq-dal">
+                    <rect key="frame" x="60" y="142" width="294.5" height="29"/>
+                    <attributedString key="attributedText">
+                        <fragment>
+                            <string key="content">Trong cài đặt Visafe:
+Chọn Thông báo -&gt; Bật switch Cho phép Thông báo</string>
+                            <attributes>
+                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                <font key="NSFont" metaFont="cellTitle"/>
+                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                            </attributes>
+                        </fragment>
+                    </attributedString>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" red="0.89803921568627454" green="0.89803921568627454" blue="0.89803921568627454" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
+                <constraint firstItem="TMY-sq-dal" firstAttribute="top" secondItem="NMJ-B0-h6e" secondAttribute="bottom" constant="50" id="A5I-xa-SKL"/>
                 <constraint firstItem="NMJ-B0-h6e" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="BlO-Jf-di8"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="NMJ-B0-h6e" secondAttribute="trailing" id="GsV-Gg-2Lk"/>
                 <constraint firstItem="NMJ-B0-h6e" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="jGm-gw-FvG"/>
+                <constraint firstItem="TMY-sq-dal" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="piu-5G-bvp"/>
             </constraints>
-            <point key="canvasLocation" x="-47.826086956521742" y="-22.767857142857142"/>
+            <point key="canvasLocation" x="-233.33333333333334" y="-100.44642857142857"/>
         </view>
     </objects>
     <resources>

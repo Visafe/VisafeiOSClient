@@ -11,6 +11,7 @@ import Toast_Swift
 class NotiSettingVC: BaseViewController, UNUserNotificationCenterDelegate {
 
 
+    @IBOutlet weak var instruction: UILabel!
     @IBOutlet weak var switch_dns_server: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,14 +29,17 @@ class NotiSettingVC: BaseViewController, UNUserNotificationCenterDelegate {
             if settings.authorizationStatus == .notDetermined {
                 DispatchQueue.main.async {
                     self.switch_dns_server.setImage(UIImage(named: "Switch_off"), for: .normal)
+                    self.instruction.text = "Trong cài đặt Visafe:\nChọn Thông báo -> Bật switch Cho phép Thông báo"
                 }
             } else if settings.authorizationStatus == .denied {
                 DispatchQueue.main.async {
                     self.switch_dns_server.setImage(UIImage(named: "Switch_off"), for: .normal)
+                    self.instruction.text = "Trong cài đặt Visafe:\nChọn Thông báo -> Bật switch Cho phép Thông báo"
                 }
             } else if settings.authorizationStatus == .authorized {
                 DispatchQueue.main.async {
                     self.switch_dns_server.setImage(UIImage(named: "Switch_on"), for: .normal)
+                    self.instruction.text = "Trong cài đặt Visafe:\nChọn Thông báo -> Tắt switch Cho phép Thông báo"
                 }
             }
         })
