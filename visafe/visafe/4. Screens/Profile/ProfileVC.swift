@@ -105,6 +105,7 @@ class ProfileVC: BaseViewController {
         let nsObject: AnyObject? = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as AnyObject
         let version = nsObject as! String
         version_experiment.text = "Phiên bản thử nghiệm Visafe: " + version
+
     }
     
     @objc func refreshData() {
@@ -155,19 +156,24 @@ extension ProfileVC: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
 
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//        let headerView = ProfileHeaderView.loadFromNib()
-//        headerView?.actionLogin = {  [weak self] in
-//            guard let weakSelf = self else { return }
-//            weakSelf.login()
-//        }
-//        headerView?.actionProfile = {  [weak self] in
-//            guard let weakSelf = self else { return }
-//            weakSelf.editProfile()
-//        }
-//        headerView?.bindingData()
-//        return headerView
-        return nil
+//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+////        let headerView = ProfileHeaderView.loadFromNib()
+////        headerView?.actionLogin = {  [weak self] in
+////            guard let weakSelf = self else { return }
+////            weakSelf.login()
+////        }
+////        headerView?.actionProfile = {  [weak self] in
+////            guard let weakSelf = self else { return }
+////            weakSelf.editProfile()
+////        }
+////        headerView?.bindingData()
+////        return headerView
+//
+//        return CGFloat.leastNonzeroMagnitude
+//    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return CGFloat.leastNonzeroMagnitude
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -243,6 +249,7 @@ extension ProfileVC: UITableViewDelegate, UITableViewDataSource {
 //            weakSelf.login()
 //        }
 //        return footerView
+
         return nil
     }
     
