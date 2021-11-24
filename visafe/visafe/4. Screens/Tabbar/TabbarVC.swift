@@ -36,11 +36,11 @@ class TabbarVC: BaseTabbarController {
         let protectNav = BaseNavigationController(rootViewController: protectVC)
         
         
-        workspace.title = "Workspace"
-        let tab2 = UITabBarItem(title: "Workspace", image: UIImage(named: "group_tabbar"), selectedImage: UIImage(named: "group_tabbar"))
-        tab2.tag = 2
-        workspace.tabBarItem = tab2
-        let workspaceNav = BaseNavigationController(rootViewController: workspace)
+//        workspace.title = "Workspace"
+//        let tab2 = UITabBarItem(title: "Workspace", image: UIImage(named: "group_tabbar"), selectedImage: UIImage(named: "group_tabbar"))
+//        tab2.tag = 2
+//        workspace.tabBarItem = tab2
+//        let workspaceNav = BaseNavigationController(rootViewController: workspace)
         
        
         let tab3 = ESTabBarItem.init(ExampleBouncesContentView(), title: nil, image: UIImage(named: "ic_scan_select"), selectedImage: UIImage(named: "ic_scan_select"))
@@ -48,20 +48,20 @@ class TabbarVC: BaseTabbarController {
         let homeNav = BaseNavigationController(rootViewController: homeVC)
         homeNav.tabBarItem = tab3
         
-        notiVC.title = "Thông báo"
-        let tab4 = UITabBarItem(title: "Thông báo", image: UIImage(named: "notification_tabbar"), selectedImage: UIImage(named: "notification_tabbar"))
-        tab4.tag = 4
-        notiVC.tabBarItem = tab4
-        let notiNav = BaseNavigationController(rootViewController: notiVC)
+//        notiVC.title = "Thông báo"
+//        let tab4 = UITabBarItem(title: "Thông báo", image: UIImage(named: "notification_tabbar"), selectedImage: UIImage(named: "notification_tabbar"))
+//        tab4.tag = 4
+//        notiVC.tabBarItem = tab4
+//        let notiNav = BaseNavigationController(rootViewController: notiVC)
         
-        profileVC.title = "Tài khoản"
-        let tab5 = UITabBarItem(title: "Tài khoản", image: UIImage(named: "profile_tabbar"), selectedImage: UIImage(named: "profile_tabbar"))
+        profileVC.title = "Cài đặt"
+        let tab5 = UITabBarItem(title: "Cài đặt", image: UIImage(named: "profile_tabbar"), selectedImage: UIImage(named: "ic_setting"))
         tab5.tag = 5
         profileVC.tabBarItem = tab5
         let profileNav = BaseNavigationController(rootViewController: profileVC)
     
-        self.viewControllers = [protectNav, workspaceNav, homeNav, notiNav, profileNav]
-        selectedIndex = 2
+        self.viewControllers = [protectNav, homeNav, profileNav]
+        selectedIndex = 1
         tabBar.tintColor = UIColor.black
     }
     
@@ -81,8 +81,8 @@ class TabbarVC: BaseTabbarController {
     }
     
     @objc func onClickMain() {
-        if selectedIndex != 2 {
-            selectedIndex = 2
+        if selectedIndex != 1 {
+            selectedIndex = 1
             updateStateMainButton(selected: true)
         }
     }
