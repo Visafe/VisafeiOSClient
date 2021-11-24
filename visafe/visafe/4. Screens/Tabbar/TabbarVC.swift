@@ -55,7 +55,7 @@ class TabbarVC: BaseTabbarController {
 //        let notiNav = BaseNavigationController(rootViewController: notiVC)
         
         profileVC.title = "Cài đặt"
-        let tab5 = UITabBarItem(title: "Cài đặt", image: UIImage(named: "profile_tabbar"), selectedImage: UIImage(named: "ic_setting"))
+        let tab5 = UITabBarItem(title: "Cài đặt", image: UIImage(named: "ic_setting"), selectedImage: UIImage(named: "ic_setting"))
         tab5.tag = 5
         profileVC.tabBarItem = tab5
         let profileNav = BaseNavigationController(rootViewController: profileVC)

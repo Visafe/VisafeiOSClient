@@ -114,7 +114,7 @@ class ProfileVC: BaseViewController {
     }
     
     func configView() {
-        title = "Tài khoản"
+        title = "Cài đặt"
         tableView.sectionHeaderHeight = UITableView.automaticDimension
         tableView.estimatedSectionHeaderHeight = 25
         tableView.sectionFooterHeight = UITableView.automaticDimension
