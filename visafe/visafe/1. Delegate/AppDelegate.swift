@@ -49,28 +49,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func appInit() {
         RoutingWorker.getDnsServer { data, _, _ in
-            guard let hostname = data?.hostname else {
-                CacheManager.shared.setDnsServer(value: dnsServer)
-                if #available(iOS 14.0, *) {
-                    DoHNative.shared.resetDnsSetting()
-                } else {
-                    // Fallback on earlier versions
-                }
-                return
+            
+            if CacheManager.shared.getDnsServer() == nil
+            {
+                CacheManager.shared.setDnsServer(value: "https://security.visafe.vn/dns-query/")
             }
-            var dns = hostname
-            if dns.last == "/" {
-                dns.removeLast()
-            }
-            if !dns.contains("https://") && !dns.contains("http://") {
-                dns = "https://" + dns + "/dns-query/%@"
-            }
-            CacheManager.shared.setDnsServer(value: dns)
+            
             if #available(iOS 14.0, *) {
                 DoHNative.shared.resetDnsSetting()
             } else {
                 // Fallback on earlier versions
             }
+            
         }
 
     }

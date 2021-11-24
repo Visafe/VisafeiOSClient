@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class SetDnsServerVC:BaseViewController{
+class SetDnsServerVC:BaseDoHVC{
     @IBOutlet weak var radio0: UIButton!
     @IBOutlet weak var radio1: UIButton!
     @IBOutlet weak var radio2: UIButton!
@@ -75,17 +75,21 @@ class SetDnsServerVC:BaseViewController{
     @IBAction func radio_default(_ sender: UIButton) {
         UpdateRadioStatus(num: 0)
         CacheManager.shared.setDnsServer(value: "https://security.visafe.vn/dns-query/")
+        DoHNative.shared.onOffDoH_NoNoti(true, handleSaveSuccess)
     }
     @IBAction func radio_family(_ sender: UIButton) {
         UpdateRadioStatus(num: 1)
         CacheManager.shared.setDnsServer(value: "https://family.visafe.vn/dns-query/")
+        DoHNative.shared.onOffDoH_NoNoti(true, handleSaveSuccess)
     }
     @IBAction func radio_advanced(_ sender: UIButton) {
         UpdateRadioStatus(num: 2)
         CacheManager.shared.setDnsServer(value: "https://securityplus.visafe.vn/dns-query/")
+        DoHNative.shared.onOffDoH_NoNoti(true, handleSaveSuccess)
     }
     @IBAction func radio_custom(_ sender: UIButton) {
         UpdateRadioStatus(num: 3)
         CacheManager.shared.setDnsServer(value: "https://custom.visafe.vn/dns-query/")
+        DoHNative.shared.onOffDoH_NoNoti(true, handleSaveSuccess)
     }
 }
