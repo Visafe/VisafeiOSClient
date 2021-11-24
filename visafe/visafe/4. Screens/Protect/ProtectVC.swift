@@ -303,7 +303,7 @@ extension ProtectVC {
     }
 
     @IBAction func showProtectDevice(_ sender: Any) {
-        guard checkLoginState() else { return }
+//        guard checkLoginState() else { return }
         guard let statistic = statisticModel,
               let group = groupModel else { return }
         let vc = ProtectDeviceVC(group: group,
@@ -313,7 +313,7 @@ extension ProtectVC {
     }
 
     @IBAction func showProtectWifi(_ sender: Any) {
-        guard checkLoginState() else { return }
+//        guard checkLoginState() else { return }
         guard let statistic = statisticModel,
               let group = groupModel else { return }
         let vc = ProtectDeviceVC(group: group,

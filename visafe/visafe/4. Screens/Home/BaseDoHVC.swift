@@ -86,7 +86,7 @@ class BaseDoHVC: BaseViewController {
 //            self.stoprotate()
             self.showWarning(title: "Hướng dẫn cài đặt Visafe",
                              content: "Mở Cài đặt -> Cài đặt chung -> Quản lý VPN & thiết bị -> DNS -> Chọn Visafe") {
-                guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
+                guard let settingsUrl = URL(string: "App-prefs:root=General&path=ManagedConfigurationList/DNS") else {
                             return
                         }
 
