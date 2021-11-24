@@ -129,7 +129,7 @@ class ProtectVC: BaseDoHVC {
             lastScanLabel.text = ""
             return
         }
-        lastScanLabel.text = "Lần quét gần nhất \(DateFormatter.timeAgoSinceDate(date: lastScan, currentDate: Date()))"
+        lastScanLabel.text = "Đã quét \(DateFormatter.timeAgoSinceDate(date: lastScan, currentDate: Date()))"
         
     }
 
@@ -158,8 +158,8 @@ class ProtectVC: BaseDoHVC {
         }
         let isTrue = scanNumberIssue == 0
         let highlightColor: UIColor = isTrue ? .systemGreen : .systemRed
-        let text = isTrue ? "Bạn đang an toàn" : "Đã phát hiện \(scanNumberIssue) sự cố"
-        let highlightText = isTrue ? "an toàn" : "\(scanNumberIssue) sự cố"
+        let text = isTrue ? "Bạn đang được bảo vệ" : "Đã phát hiện \(scanNumberIssue) vấn đề cần xử lý"
+        let highlightText = isTrue ? "bảo vệ" : "\(scanNumberIssue) vấn đề cần xử lý"
 
         let attributedText = NSMutableAttributedString(string: text, attributes: [.font : font,
                                                                                   .foregroundColor: highlightColor])
