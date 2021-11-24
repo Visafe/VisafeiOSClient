@@ -103,9 +103,7 @@ class ProfileVC: BaseViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(refreshData), name: NSNotification.Name(rawValue: kLoginSuccess), object: nil)
         configView()
         let nsObject: AnyObject? = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as AnyObject
-
         let version = nsObject as! String
-        
         version_experiment.text = "Phiên bản thử nghiệm Visafe: " + version
     }
     
@@ -156,8 +154,8 @@ extension ProfileVC: UITableViewDelegate, UITableViewDataSource {
         cell.bindingData(type: sources[indexPath.row])
         return cell
     }
-    
-//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
 //        let headerView = ProfileHeaderView.loadFromNib()
 //        headerView?.actionLogin = {  [weak self] in
 //            guard let weakSelf = self else { return }
@@ -169,7 +167,8 @@ extension ProfileVC: UITableViewDelegate, UITableViewDataSource {
 //        }
 //        headerView?.bindingData()
 //        return headerView
-//    }
+        return nil
+    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
@@ -196,11 +195,16 @@ extension ProfileVC: UITableViewDelegate, UITableViewDataSource {
         case .rate:
             rateApp()
         case .setDNSserver:
-            self.view.makeToast("Thiết lập cấu hình bảo vệ", duration: 3.0, position: .bottom)
+            setDnsServer()
         }
 
     }
     
+    func setDnsServer(){
+        let vc = SetDnsServerVC()
+        let nav = BaseNavigationController(rootViewController: vc)
+        present(nav, animated: true)
+    }
     func vipMemberAction() {
         let vc = VipMemberVC()
         let nav = BaseNavigationController(rootViewController: vc)

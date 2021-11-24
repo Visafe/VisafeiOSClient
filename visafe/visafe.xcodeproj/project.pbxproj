@@ -60,6 +60,8 @@
 		518EC10126B9A35900D88D2A /* ProtectDetailListBlockVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 518EC10026B9A35900D88D2A /* ProtectDetailListBlockVC.xib */; };
 		518EC10526B9A36300D88D2A /* ProtectDetailListBlockVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518EC10426B9A36300D88D2A /* ProtectDetailListBlockVC.swift */; };
 		94071E96037B9D9676B065CB /* Pods_Report.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90768148105DCE33987C8B4E /* Pods_Report.framework */; };
+		C0E47AF1274E264A003A0707 /* SetDnsServerVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0E47AF0274E2649003A0707 /* SetDnsServerVC.xib */; };
+		C0E47AF5274E2B8F003A0707 /* SetDnsServerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E47AF4274E2B8F003A0707 /* SetDnsServerVC.swift */; };
 		C90AD90426C52371003539FF /* PackageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90AD90326C52371003539FF /* PackageModel.swift */; };
 		C90AD90726C52669003539FF /* PaymentWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90AD90626C52669003539FF /* PaymentWorker.swift */; };
 		C90AD90A26C55380003539FF /* OrderResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90AD90926C55380003539FF /* OrderResult.swift */; };
@@ -429,6 +431,8 @@
 		518EC10426B9A36300D88D2A /* ProtectDetailListBlockVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProtectDetailListBlockVC.swift; sourceTree = "<group>"; };
 		90768148105DCE33987C8B4E /* Pods_Report.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Report.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		907E3660E73749DFAE56C748 /* Pods-visafe.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-visafe.debug.xcconfig"; path = "Target Support Files/Pods-visafe/Pods-visafe.debug.xcconfig"; sourceTree = "<group>"; };
+		C0E47AF0274E2649003A0707 /* SetDnsServerVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SetDnsServerVC.xib; sourceTree = "<group>"; };
+		C0E47AF4274E2B8F003A0707 /* SetDnsServerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetDnsServerVC.swift; sourceTree = "<group>"; };
 		C90AD90326C52371003539FF /* PackageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackageModel.swift; sourceTree = "<group>"; };
 		C90AD90626C52669003539FF /* PaymentWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentWorker.swift; sourceTree = "<group>"; };
 		C90AD90926C55380003539FF /* OrderResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderResult.swift; sourceTree = "<group>"; };
@@ -1253,6 +1257,8 @@
 				C9777A2E269AC5CA00C40031 /* Cell */,
 				C99FD1D6269746C200A8F731 /* ProfileVC.swift */,
 				C99FD1D7269746C200A8F731 /* ProfileVC.xib */,
+				C0E47AF0274E2649003A0707 /* SetDnsServerVC.xib */,
+				C0E47AF4274E2B8F003A0707 /* SetDnsServerVC.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -1675,6 +1681,7 @@
 				C93FFDE6269AF48800D7B02A /* ProfileSettingVC.xib in Resources */,
 				C91813F7269AFB1300DC0E83 /* ProfileHelpVC.xib in Resources */,
 				518EC10126B9A35900D88D2A /* ProtectDetailListBlockVC.xib in Resources */,
+				C0E47AF1274E264A003A0707 /* SetDnsServerVC.xib in Resources */,
 				C9777A32269AC5E100C40031 /* ProfileCell.xib in Resources */,
 				C979C97426B6E39700F97E4F /* InviteMemberToGroupVC.xib in Resources */,
 				C956058326AE9D8500AD8475 /* GroupListDeviceVC.xib in Resources */,
@@ -2041,6 +2048,7 @@
 				C93C235526A97FA1003AC717 /* StatisticCategoryCell.swift in Sources */,
 				C949D72726B06BF700647FF6 /* LicenseCell.swift in Sources */,
 				C919B96D26822157009982C3 /* BaseView.swift in Sources */,
+				C0E47AF5274E2B8F003A0707 /* SetDnsServerVC.swift in Sources */,
 				C91D45962694CCB900055A4E /* BaseTextField.swift in Sources */,
 				C9E7A4A22690C6100012985B /* ConfirmDeleteView.swift in Sources */,
 				C93ED16A2682332A00B03E8A /* TabbarVC.swift in Sources */,
