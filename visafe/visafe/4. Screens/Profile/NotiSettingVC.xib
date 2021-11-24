@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NotiSettingVC" customModule="visafe" customModuleProvider="target">
             <connections>
+                <outlet property="switch_dns_server" destination="aJW-kY-QeH" id="obh-xy-c53"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -20,7 +21,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="NMJ-B0-h6e">
-                    <rect key="frame" x="0.0" y="44" width="414" height="96"/>
+                    <rect key="frame" x="0.0" y="44" width="414" height="48"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bAd-px-DNh">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="48"/>
@@ -32,6 +33,9 @@
                                         <constraint firstAttribute="height" constant="24" id="pd5-6M-bVi"/>
                                     </constraints>
                                     <state key="normal" image="Switch_off"/>
+                                    <connections>
+                                        <action selector="switch_dns_server:" destination="-1" eventType="touchUpInside" id="Txp-M2-clk"/>
+                                    </connections>
                                 </button>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PtU-fm-ZQS">
                                     <rect key="frame" x="0.0" y="47" width="414" height="1"/>
@@ -40,8 +44,8 @@
                                         <constraint firstAttribute="height" constant="1" id="zhN-4S-JXa"/>
                                     </constraints>
                                 </view>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cảnh báo kết quả rà soát định kỳ " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q2x-RG-P7E">
-                                    <rect key="frame" x="16" y="15.5" width="216" height="17"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cảnh báo kết nối nguy hại" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q2x-RG-P7E">
+                                    <rect key="frame" x="16" y="15.5" width="167" height="17"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <color key="textColor" red="0.13333333333333333" green="0.13333333333333333" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
@@ -59,8 +63,8 @@
                                 <constraint firstItem="aJW-kY-QeH" firstAttribute="centerY" secondItem="bAd-px-DNh" secondAttribute="centerY" id="fjn-eC-ZYE"/>
                             </constraints>
                         </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UvX-fi-jql">
-                            <rect key="frame" x="0.0" y="48" width="414" height="48"/>
+                        <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UvX-fi-jql">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="48"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9wr-3E-b1L">
                                     <rect key="frame" x="358" y="12" width="40" height="24"/>
@@ -69,6 +73,9 @@
                                         <constraint firstAttribute="width" constant="40" id="grc-1c-Ek4"/>
                                     </constraints>
                                     <state key="normal" image="Switch_off"/>
+                                    <connections>
+                                        <action selector="switch:" destination="-1" eventType="touchUpInside" id="Udf-gR-jnY"/>
+                                    </connections>
                                 </button>
                                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="42R-yu-sXt">
                                     <rect key="frame" x="0.0" y="47" width="414" height="1"/>
@@ -106,7 +113,7 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="NMJ-B0-h6e" secondAttribute="trailing" id="GsV-Gg-2Lk"/>
                 <constraint firstItem="NMJ-B0-h6e" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="jGm-gw-FvG"/>
             </constraints>
-            <point key="canvasLocation" x="66.666666666666671" y="75"/>
+            <point key="canvasLocation" x="-47.826086956521742" y="-22.767857142857142"/>
         </view>
     </objects>
     <resources>

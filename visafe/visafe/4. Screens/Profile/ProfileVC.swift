@@ -73,7 +73,7 @@ public enum ProfileEnum: Int {
         case .upgradeAccount:
             return "Basic"
         case .setting:
-            return "Mật khẩu & bảo mật"
+            return "Mật khẩu & Thông báo"
         default:
             return ""
         }
