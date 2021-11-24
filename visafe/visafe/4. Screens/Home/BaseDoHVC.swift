@@ -75,7 +75,7 @@ class BaseDoHVC: BaseViewController {
     }
 
     func handleSaveError(_ error: Error) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+        DispatchQueue.main.asyncAfter(deadline: .now()) {
             //            self.stoprotate()
             self.showWarning(title: "Thông báo", content: error.localizedDescription)
         }
