@@ -140,6 +140,30 @@ class DoHNative {
             // Fallback on earlier versions
         }
     }
+    func onOffDoH_NoNoti(_ isOn: Bool, _ showWarning: (() -> Void)?) {
+        if #available(iOS 14.0, *) {
+            loadDnsManager { [weak self] dnsManager in
+                guard let dnsManager = dnsManager else {
+                    return
+                }
+                let status = isOn ? NEOnDemandRuleConnect(): NEOnDemandRuleDisconnect()
+                dnsManager.onDemandRules = [status]
+                dnsManager.saveToPreferences { _ in }
+                let oldValue = CacheManager.shared.getDohStatus() ?? false
+                CacheManager.shared.setDohStatus(value: isOn)
+                if oldValue != isOn {
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: updateDnsStatus), object: nil)
+                }
+                if !dnsManager.isEnabled {
+                    if isOn {
+                        showWarning?()
+                    }
+                }
+            }
+        } else {
+            // Fallback on earlier versions
+        }
+    }
 }
 
 enum NativeDnsProviderError: Error {
