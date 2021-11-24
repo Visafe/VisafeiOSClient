@@ -7,6 +7,7 @@
 
 import UIKit
 import StoreKit
+import Toast_Swift
 
 public enum ProfileEnum: Int {
     case accountType = 0
@@ -17,6 +18,7 @@ public enum ProfileEnum: Int {
     case rate = 5
     case vipmember = 6
     case logout = 7
+    case setDNSserver = 8
     
     func getIcon() -> UIImage? {
         switch self {
@@ -36,6 +38,8 @@ public enum ProfileEnum: Int {
             return UIImage(named: "vip_member")
         case .logout:
             return UIImage(named: "ic_logout")
+        case .setDNSserver:
+            return UIImage(named: "ic_setDnsServer")
         }
     }
     
@@ -57,6 +61,8 @@ public enum ProfileEnum: Int {
             return "Thành viên VIP"
         case .logout:
             return "Đăng xuất"
+        case .setDNSserver:
+            return "Cấu hình bảo vệ"
         }
     }
     
@@ -77,6 +83,8 @@ public enum ProfileEnum: Int {
         switch self {
         case .rate:
             return 6
+        case.setDNSserver:
+            return 6
         default:
             return 0.5
         }
@@ -87,7 +95,7 @@ class ProfileVC: BaseViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    var sources: [ProfileEnum] = CacheManager.shared.getIsLogined() ? [.setting, .help, .share, .rate, .vipmember, .logout] : [.setting, .help, .share, .rate, .vipmember]
+    var sources: [ProfileEnum] = CacheManager.shared.getIsLogined() ? [.setDNSserver, .setting, .help, .share, .rate, .vipmember, .logout] : [.setDNSserver, .setting, .help, .share, .rate, .vipmember]
     
     @IBOutlet weak var version_experiment: UILabel!
     override func viewDidLoad() {
@@ -103,7 +111,7 @@ class ProfileVC: BaseViewController {
     
     @objc func refreshData() {
         guard isViewLoaded else { return }
-        sources = CacheManager.shared.getIsLogined() ? [.setting, .help, .share, .rate, .vipmember, .logout] : [.setting, .help, .share, .rate, .vipmember]
+        sources = CacheManager.shared.getIsLogined() ? [.setDNSserver, .setting, .help, .share, .rate, .vipmember, .logout] : [.setDNSserver, .setting, .help, .share, .rate, .vipmember]
         tableView.reloadData()
     }
     
@@ -149,19 +157,19 @@ extension ProfileVC: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = ProfileHeaderView.loadFromNib()
-        headerView?.actionLogin = {  [weak self] in
-            guard let weakSelf = self else { return }
-            weakSelf.login()
-        }
-        headerView?.actionProfile = {  [weak self] in
-            guard let weakSelf = self else { return }
-            weakSelf.editProfile()
-        }
-        headerView?.bindingData()
-        return headerView
-    }
+//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+//        let headerView = ProfileHeaderView.loadFromNib()
+//        headerView?.actionLogin = {  [weak self] in
+//            guard let weakSelf = self else { return }
+//            weakSelf.login()
+//        }
+//        headerView?.actionProfile = {  [weak self] in
+//            guard let weakSelf = self else { return }
+//            weakSelf.editProfile()
+//        }
+//        headerView?.bindingData()
+//        return headerView
+//    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
@@ -187,7 +195,10 @@ extension ProfileVC: UITableViewDelegate, UITableViewDataSource {
             vipMemberAction()
         case .rate:
             rateApp()
+        case .setDNSserver:
+            self.view.makeToast("Thiết lập cấu hình bảo vệ", duration: 3.0, position: .bottom)
         }
+
     }
     
     func vipMemberAction() {
