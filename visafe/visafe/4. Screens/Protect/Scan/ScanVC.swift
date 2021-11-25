@@ -33,7 +33,7 @@ public enum ScanDescriptionEnum: String {
             guard let lastScan = CacheManager.shared.getLastScan() else {
                 return "Lần quét gần nhất vừa mới xong"
             }
-            return "Lần quét gần nhất \(DateFormatter.timeAgoSinceDate(date: lastScan, currentDate: Date()))"
+            return "Đã quét \(DateFormatter.timeAgoSinceDate(date: lastScan, currentDate: Date()))"
         }
     }
     
