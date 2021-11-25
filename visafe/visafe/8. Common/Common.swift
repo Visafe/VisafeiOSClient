@@ -66,8 +66,7 @@ class Common {
         if let _vip = CacheManager.shared.getVipDOH() {
             return _vip + CacheManager.shared.getDeviceId()
         }
-        var dnsServer:String = CacheManager.shared.getDnsServer()!
-        print(dnsServer + CacheManager.shared.getDeviceId())
-        return String(format: dnsServer, CacheManager.shared.getDeviceId())
+        var dnsServer:String = CacheManager.shared.getDnsServer()! + CacheManager.shared.getDeviceId()
+        return dnsServer
     }
 }

@@ -54,12 +54,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             {
                 CacheManager.shared.setDnsServer(value: "https://security.visafe.vn/dns-query/")
             }
-            
-            if #available(iOS 14.0, *) {
-                DoHNative.shared.resetDnsSetting()
-            } else {
-                // Fallback on earlier versions
-            }
+            print(CacheManager.shared.getDnsServer())
+//            if #available(iOS 14.0, *) {
+//                DoHNative.shared.resetDnsSetting()
+//            } else {
+//                // Fallback on earlier versions
+//            }
             
         }
 

@@ -121,6 +121,9 @@ class DoHNative {
                     return
                 }
                 let status = isOn ? NEOnDemandRuleConnect(): NEOnDemandRuleDisconnect()
+                let dohSetting = NEDNSOverHTTPSSettings(servers: [])
+                dohSetting.serverURL = URL(string: Common.getDnsServer())
+                NEDNSSettingsManager.shared().dnsSettings = dohSetting
                 dnsManager.onDemandRules = [status]
                 dnsManager.saveToPreferences { _ in }
                 let oldValue = CacheManager.shared.getDohStatus() ?? false
@@ -146,6 +149,9 @@ class DoHNative {
                 guard let dnsManager = dnsManager else {
                     return
                 }
+                let dohSetting = NEDNSOverHTTPSSettings(servers: [])
+                dohSetting.serverURL = URL(string: Common.getDnsServer())
+                NEDNSSettingsManager.shared().dnsSettings = dohSetting
                 let status = isOn ? NEOnDemandRuleConnect(): NEOnDemandRuleDisconnect()
                 dnsManager.onDemandRules = [status]
                 dnsManager.saveToPreferences { _ in }
