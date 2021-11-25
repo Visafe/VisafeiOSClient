@@ -2243,18 +2243,18 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "iPhone Developer: Vu Nguyen Tuan (7GNUB5YFDR)";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = PPZ8Y7NW8F;
 				ENABLE_BITCODE = YES;
 				"ENABLE_HARDENED_RUNTIME[sdk=macosx*]" = NO;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "$(SRCROOT)/visafe/6 .Resource/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.5.4;
+				MARKETING_VERSION = 1.5.5;
 				PRODUCT_BUNDLE_IDENTIFIER = vn.visafe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2279,18 +2279,18 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "iPhone Developer: Vu Nguyen Tuan (7GNUB5YFDR)";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = PPZ8Y7NW8F;
 				ENABLE_BITCODE = YES;
 				"ENABLE_HARDENED_RUNTIME[sdk=macosx*]" = NO;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "$(SRCROOT)/visafe/6 .Resource/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.5.4;
+				MARKETING_VERSION = 1.5.5;
 				PRODUCT_BUNDLE_IDENTIFIER = vn.visafe;
 				"PRODUCT_BUNDLE_IDENTIFIER[sdk=macosx*]" = vn.visafe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2311,16 +2311,16 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "iPhone Developer: Vu Nguyen Tuan (7GNUB5YFDR)";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = PPZ8Y7NW8F;
 				INFOPLIST_FILE = Report/ExtionsionInfo.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.5.4;
+				MARKETING_VERSION = 1.5.5;
 				PRODUCT_BUNDLE_IDENTIFIER = vn.visafe.Report;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -2337,16 +2337,16 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "iPhone Developer: Vu Nguyen Tuan (7GNUB5YFDR)";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = PPZ8Y7NW8F;
 				INFOPLIST_FILE = Report/ExtionsionInfo.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.5.4;
+				MARKETING_VERSION = 1.5.5;
 				PRODUCT_BUNDLE_IDENTIFIER = vn.visafe.Report;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
